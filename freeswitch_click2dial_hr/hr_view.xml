@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  FreeSWITCH Click2dial HR module for OpenERP
+  Copyright (C) 2014 Trever L. Adams
+  The licence is in the file __openerp__.py
+
+  Inherit event HR view to add 'Dial' button next to 'phone'
+  field
+-->
+
+<openerp>
+<data>
+
+<record id="view_employee_form" model="ir.ui.view">
+    <field name="name">freeswitch.hr.employee.form.dial</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr_phone.view_employee_form"/>
+    <field name="arch" type="xml">
+        <field name="work_phone" position="replace">
+            <group colspan="2" col="3">
+                <field name="work_phone" widget="phone" colspan="2" />
+                <button name="action_dial" context="{'field2dial': 'work_phone'}" string="Dial" type="object" attrs="{'invisible':[('work_phone','=',False)]}"/>
+            </group>
+        </field>
+        <field name="mobile_phone" position="replace">
+            <group colspan="2" col="3">
+                <field name="mobile_phone" widget="phone" colspan="2" />
+                <button name="action_dial" context="{'field2dial': 'mobile_phone'}" string="Dial" type="object" attrs="{'invisible':[('mobile_phone','=',False)]}"/>
+            </group>
+        </field>
+    </field>
+</record>
+
+</data>
+</openerp>
