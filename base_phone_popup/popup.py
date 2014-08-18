@@ -75,7 +75,7 @@ class phone_common(orm.AbstractModel):
 
     def incall_notify_by_extension(
             self, cr, uid, number, extension_list, context=None):
-        assert isinstance(extension_list, list), 'login_list must be a list'
+        assert isinstance(extension_list, list), 'extension_list must be a list'
         res = self.get_record_from_phone_number(
             cr, uid, number, context=context)
         user_ids = self.pool['res.users'].search(
@@ -92,9 +92,6 @@ class phone_common(orm.AbstractModel):
                 if user['context_incall_popup']:
                     self.pool['action.request'].notify(
                         cr, uid, to_id=user['id'], **action)
-                    logger.info(
-                        'This action has been sent to user ID %d: %s'
-                        % (user['id'], action))
         if res:
             callerid = res[2]
         else:

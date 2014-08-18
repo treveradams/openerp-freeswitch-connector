@@ -177,7 +177,6 @@ class phone_common(orm.AbstractModel):
                 name = obj.name_get(
                     cr, uid, res_ids[0], context=ctx_phone)[0][1]
                 res = (objname, res_ids[0], name)
-                print "res=", res
                 _logger.debug(
                     u"Answer get_record_from_phone_number: (%s, %d, %s)"
                     % (res[0], res[1], res[2]))

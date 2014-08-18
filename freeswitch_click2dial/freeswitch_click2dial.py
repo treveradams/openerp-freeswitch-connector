@@ -306,16 +306,15 @@ class freeswitch_server(orm.Model):
             ret = fs_manager.api('show', "calls as delim | like callee_cid_num " + str(user.internal_number))
             f = StringIO.StringIO(ret.getBody())
             reader = csv.DictReader(f, delimiter='|')
-            reader.next()
             for row in reader:
-                if row["callstate"] not in ["EARLY","ACTIVE","RINGING"]:
+                if not row["uuid"] or row["uuid"] == "":
+                    break
+                if row["uuid"] == "uuid" or row["callstate"] not in ["EARLY","ACTIVE","RINGING"]:
                     continue
-                if row["cid_num"] and row["cid_num"] != "0" and row["cid_num"] != None:
-                    calling_party_number = row["cid_num"]
-                elif row["b_cid_num"] != None:
+                if row["b_cid_num"] and row["b_cid_num"] != None:
                     calling_party_number = row["b_cid_num"]
-            #from pprint import pprint
-            #pprint(list_chan)
+                elif row["cid_num"] and row["cid_num"] != None:
+                    calling_party_number = row["cid_num"]
         except Exception, e:
             _logger.error("Error in the Status request to FreeSWITCH server %s" % fs_server.ip_address)
             _logger.error("Here is the detail of the error : '%s'" % unicode(e))

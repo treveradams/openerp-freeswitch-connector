@@ -1,0 +1,24 @@
+diff -r b11a6f73c2ed web_longpolling/namespace.py
+--- a/web_longpolling/namespace.py	Wed Jun 04 23:53:25 2014 +0200
++++ b/web_longpolling/namespace.py	Mon Aug 18 02:05:43 2014 -0600
+@@ -14,6 +14,8 @@
+     def __init__(self, *args, **kwargs):
+         super(LongPollingNameSpace, self).__init__(*args, **kwargs)
+         self.event_started = False
++        self.context = {}
++        self.database = None
+ 
+     # dist of the events add to the namespace
+     # {event: [(function, adapterClass), ]}
+diff -r b11a6f73c2ed web_socketio/web_socketio.py
+--- a/web_socketio/web_socketio.py	Wed Jun 04 23:53:25 2014 +0200
++++ b/web_socketio/web_socketio.py	Mon Aug 18 02:05:43 2014 -0600
+@@ -24,7 +24,7 @@
+         init_logger()
+         if args.config_file:
+             logger.info("Load OpenERP config file")
+-            config.parse_config(['-c', args.conf_file])
++            config.parse_config(['-c', args.config_file])
+         self.patch_all()
+         databases = args.db
+         if not databases:
