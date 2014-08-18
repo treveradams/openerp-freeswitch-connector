@@ -39,7 +39,7 @@ the documentation for web_socketio addon.
 
 web_socketio and web_notification are needed for popup on call
 ==============================================================
-https://bitbucket.org/anybox/web_socketio/ (for 7.x use hg checkout 7.0)
+https://bitbucket.org/anybox/web_socketio/ (for 7.x use hg checkout default)
 https://bitbucket.org/anybox/web_notification (for 7.x use hg checkout default)
 
 
