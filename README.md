@@ -1,15 +1,19 @@
 openerp-freeswitch-connector
 ============================
 
-Currently this is simply a fork of http://www.akretion.com/open-source-contributions/openerp-asterisk-voip-connector
+For now, you should refer to the documentation at
+http://www.akretion.com/open-source-contributions/openerp-asterisk-voip-connector
+
+This is no longer simply a fork. It has many added features over that of the
+original.
 
 Currently working:
  * Click to Dial for customers, events, employees and applicants.
  * "Open calling partner" under Sales.
  * "Open calling applicant" under Human Resources/Recruitment
- * Pop-up on in coming call, when configured, largely works. See README.md
-   under patches-for-external for caveats. Also, editing may appear to work,
-   but it does not!
+ * Pop-up on in coming call, when configured. See README.md under
+   patches-for-external for caveats. Also, editing may appear to work, but it
+   does not!
  * Looking up Caller ID name by phone number works for Events, CRM,
    and Employees. It does NOT work for applicants. It returns the subject
    instead! (This is a bug, I hope to fix it soon.)
