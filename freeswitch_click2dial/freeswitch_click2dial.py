@@ -306,10 +306,11 @@ class freeswitch_server(orm.Model):
             ret = fs_manager.api('show', "calls as delim | like callee_cid_num " + str(user.internal_number))
             f = StringIO.StringIO(ret.getBody())
             reader = csv.DictReader(f, delimiter='|')
+            reader.next()
             for row in reader:
                 if not row["uuid"] or row["uuid"] == "":
                     break
-                if row["uuid"] == "uuid" or row["callstate"] not in ["EARLY","ACTIVE","RINGING"]:
+                if row["callstate"] not in ["EARLY","ACTIVE","RINGING"]:
                     continue
                 if row["b_cid_num"] and row["b_cid_num"] != None:
                     calling_party_number = row["b_cid_num"]

@@ -21,9 +21,9 @@
 
 {
     "name": "FreeSWITCH Click2dial HR Recruitment",
-    "version": "0.1",
+    "version": "0.2",
     "author": "Trever L. Adams",
-    "website": "",
+    "website": "http://github.com/treveradams/openerp-freeswitch-connector",
     "license": "AGPL-3",
     "category": "Phone",
     "description": """
@@ -37,7 +37,7 @@
     ],
     "demo": [],
     "data": [
-        'wizard/open_calling_partner_view.xml',
+        'wizard/open_calling_applicant_view.xml',
         'hr_recruitment_view.xml',
     ],
     "installable": True,

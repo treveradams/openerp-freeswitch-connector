@@ -52,3 +52,6 @@ server to consume resources (memory and CPU). Additionally, it starts losing pop
 Eventually, it just stops. Click to dial and caller id look-up continue to work.
 
 ALWAYS LOG OUT PROPERLY!
+
+Additionally, any time you restart OpenERP, you MUST restart the web_socketio
+server. Restarting the proxy (apache or nginx) is a good idea.
