@@ -18,13 +18,8 @@ msgstr ""
 "X-Generator: Launchpad (build 15099)\n"
 
 #. module: freeswitch_click2dial
-#: constraint:freeswitch.server:0
-msgid "The 'extension priority' must be a positive value"
-msgstr ""
-
-#. module: freeswitch_click2dial
 #: field:freeswitch.server,password:0
-msgid "AMI password"
+msgid "Event Socket password"
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -92,13 +87,6 @@ msgid "DAHDI"
 msgstr ""
 
 #. module: freeswitch_click2dial
-#: help:freeswitch.server,extension_priority:0
-msgid ""
-"Priority of the extension in the FreeSWITCH dialplan. Refer to "
-"/etc/freeswitch/extensions.conf on your FreeSWITCH server."
-msgstr ""
-
-#. module: freeswitch_click2dial
 #: field:res.users,callerid:0
 msgid "Caller ID"
 msgstr "Идентификатор на звъняващия"
@@ -123,11 +111,6 @@ msgid "Mobile : "
 msgstr ""
 
 #. module: freeswitch_click2dial
-#: field:freeswitch.server,login:0
-msgid "AMI login"
-msgstr ""
-
-#. module: freeswitch_click2dial
 #: view:res.company:0
 msgid "FreeSWITCH servers for click2dial"
 msgstr ""
@@ -140,11 +123,6 @@ msgstr ""
 #. module: freeswitch_click2dial
 #: field:freeswitch.server,context:0
 msgid "Dialplan context"
-msgstr ""
-
-#. module: freeswitch_click2dial
-#: field:freeswitch.server,extension_priority:0
-msgid "Extension priority"
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -179,7 +157,7 @@ msgstr ""
 #: help:freeswitch.server,context:0
 msgid ""
 "FreeSWITCH dialplan context from which the calls will be made. Refer to "
-"/etc/freeswitch/extensions.conf on your FreeSWITCH server."
+"/usr/local/freeswitch/conf/dialplan/* on your FreeSWITCH server."
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -239,7 +217,7 @@ msgstr ""
 #: help:freeswitch.server,port:0
 msgid ""
 "TCP port on which the FreeSWITCH Manager Interface listens. Defined in "
-"/etc/freeswitch/manager.conf on FreeSWITCH."
+"/usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on FreeSWITCH."
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -294,7 +272,7 @@ msgstr ""
 #: help:freeswitch.server,password:0
 msgid ""
 "Password that FreeSWITCH will use to communicate with the FreeSWITCH Manager "
-"Interface. Refer to /etc/freeswitch/manager.conf on your FreeSWITCH server."
+"Interface. Refer to /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on your FreeSWITCH server."
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -321,13 +299,6 @@ msgstr ""
 #: view:freeswitch.server:0
 #: field:res.company,freeswitch_server_ids:0
 msgid "FreeSWITCH servers"
-msgstr ""
-
-#. module: freeswitch_click2dial
-#: help:freeswitch.server,login:0
-msgid ""
-"Login that OpenERP will use to communicate with the FreeSWITCH Manager "
-"Interface. Refer to /etc/freeswitch/manager.conf on your FreeSWITCH server."
 msgstr ""
 
 #. module: freeswitch_click2dial

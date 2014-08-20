@@ -45,16 +45,15 @@ class freeswitch_server(orm.Model):
         'name': fields.char('FreeSWITCH server name', size=50, required=True, help="FreeSWITCH server name."),
         'active': fields.boolean('Active', help="The active field allows you to hide the FreeSWITCH server without deleting it."),
         'ip_address': fields.char('FreeSWITCH IP addr. or DNS', size=50, required=True, help="IP address or DNS name of the FreeSWITCH server."),
-        'port': fields.integer('Port', required=True, help="TCP port on which the FreeSWITCH Manager Interface listens. Defined in /etc/freeswitch/manager.conf on FreeSWITCH."),
+        'port': fields.integer('Port', required=True, help="TCP port on which the FreeSWITCH Manager Interface listens. Defined in /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on FreeSWITCH."),
         'out_prefix': fields.char('Out prefix', size=4, help="Prefix to dial to place outgoing calls. If you don't use a prefix to place outgoing calls, leave empty."),
         'national_prefix': fields.char('National prefix', size=4, help="Prefix for national phone calls (don't include the 'out prefix'). For e.g., in France, the phone numbers look like '01 41 98 12 42' : the National prefix is '0'."),
         'international_prefix': fields.char('International prefix', required=True, size=4, help="Prefix to add to make international phone calls (don't include the 'out prefix'). For e.g., in France, the International prefix is '00'."),
         'country_prefix': fields.char('My country prefix', required=True, size=4, help="Phone prefix of the country where the FreeSWITCH server is located. For e.g. the phone prefix for France is '33'. If the phone number to dial starts with the 'My country prefix', OpenERP will remove the country prefix from the phone number and add the 'out prefix' followed by the 'national prefix'. If the phone number to dial doesn't start with the 'My country prefix', OpenERP will add the 'out prefix' followed by the 'international prefix'."),
-        'login': fields.char('AMI login', size=30, required=True, help="Login that OpenERP will use to communicate with the FreeSWITCH Manager Interface. Refer to /etc/freeswitch/manager.conf on your FreeSWITCH server."),
-        'password': fields.char('AMI password', size=30, required=True, help="Password that OpenERP will use to communicate with the FreeSWITCH Manager Interface. Refer to /etc/freeswitch/manager.conf on your FreeSWITCH server."),
-        'context': fields.char('Dialplan context', size=50, required=True, help="FreeSWITCH dialplan context from which the calls will be made. Refer to /etc/freeswitch/extensions.conf on your FreeSWITCH server."),
+        'password': fields.char('Event Socket password', size=30, required=True, help="Password that OpenERP will use to communicate with the FreeSWITCH Manager Interface. Refer to /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on your FreeSWITCH server."),
+        'context': fields.char('Dialplan context', size=50, required=True, help="FreeSWITCH dialplan context from which the calls will be made. Refer to /usr/local/freeswitch/conf/dialplan/* on your FreeSWITCH server."),
         'wait_time': fields.integer('Wait time (sec)', required=True, help="Amount of time (in seconds) FreeSWITCH will try to reach the user's phone before hanging up."),
-        'extension_priority': fields.integer('Extension priority', required=True, help="Priority of the extension in the FreeSWITCH dialplan. Refer to /etc/freeswitch/extensions.conf on your FreeSWITCH server."),
+#        'extension_priority': fields.integer('Extension priority', required=True, help="Priority of the extension in the FreeSWITCH dialplan. Refer to /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on your FreeSWITCH server."),
         'alert_info': fields.char('Alert-Info SIP header', size=255, help="Set Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example."),
         'company_id': fields.many2one('res.company', 'Company', help="Company who uses the FreeSWITCH server."),
     }
@@ -73,7 +72,7 @@ class freeswitch_server(orm.Model):
         'national_prefix': '',
         'international_prefix': '011',
         'country_prefix': _get_prefix_from_country,
-        'extension_priority': 1,
+#        'extension_priority': 1,
         'wait_time': 15,
         'company_id': lambda self, cr, uid, context: self.pool.get('res.company')._company_default_get(cr, uid, 'freeswitch.server', context=context),
     }
@@ -86,16 +85,15 @@ class freeswitch_server(orm.Model):
             national_prefix = ('National prefix', server.national_prefix)
             dialplan_context = ('Dialplan context', server.context)
             alert_info = ('Alert-Info SIP header', server.alert_info)
-            login = ('AMI login', server.login)
-            password = ('AMI password', server.password)
+            password = ('Event Socket password', server.password)
 
             for digit_prefix in [country_prefix, international_prefix, out_prefix, national_prefix]:
                 if digit_prefix[1] and not digit_prefix[1].isdigit():
                     raise orm.except_orm(_('Error :'), _("Only use digits for the '%s' on the FreeSWITCH server '%s'" % (digit_prefix[0], server.name)))
             if server.wait_time < 1 or server.wait_time > 120:
                 raise orm.except_orm(_('Error :'), _("You should set a 'Wait time' value between 1 and 120 seconds for the FreeSWITCH server '%s'" % server.name))
-            if server.extension_priority < 1:
-                raise orm.except_orm(_('Error :'), _("The 'extension priority' must be a positive value for the FreeSWITCH server '%s'" % server.name))
+#            if server.extension_priority < 1:
+#                raise orm.except_orm(_('Error :'), _("The 'extension priority' must be a positive value for the FreeSWITCH server '%s'" % server.name))
             if server.port > 65535 or server.port < 1:
                 raise orm.except_orm(_('Error :'), _("You should set a TCP port between 1 and 65535 for the FreeSWITCH server '%s'" % server.name))
             for check_string in [dialplan_context, alert_info, login, password]:
@@ -108,7 +106,7 @@ class freeswitch_server(orm.Model):
 
 
     _constraints = [
-        (_check_validity, "Error message in raise", ['out_prefix', 'country_prefix', 'national_prefix', 'international_prefix', 'wait_time', 'extension_priority', 'port', 'context', 'alert_info', 'login', 'password']),
+        (_check_validity, "Error message in raise", ['out_prefix', 'country_prefix', 'national_prefix', 'international_prefix', 'wait_time', 'port', 'context', 'alert_info', 'password']),
     ]
 
 
@@ -280,7 +278,6 @@ class freeswitch_server(orm.Model):
 #            fs_manager.Originate(
 #                user.freeswitch_chan_type + '/' + user.resource + ( ('/' + user.dial_suffix) if user.dial_suffix else ''),
 #                extension = fs_number,
-#                priority = str(fs_server.extension_priority),
 #                timeout = str(fs_server.wait_time*1000),
 #                caller_id = user.callerid,
 #                account = user.cdraccount,

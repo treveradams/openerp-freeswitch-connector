@@ -22,15 +22,16 @@
 
 {
     'name': 'FreeSWITCH Click2dial',
-    'version': '0.4',
+    'version': '0.5',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'FreeSWITCH-OpenERP connector',
     'description': """This module adds 3 functionalities :
 
-1) It adds a 'dial' button in the partner form view so that users can directly dial a phone number through FreeSWITCH. This feature is usually known as 'click2dial'. Here is how it works :
+1) It adds a 'dial' button in the partner form view, employee form view, event registration form view, and application form view so
+that users can directly dial a phone number through FreeSWITCH. This feature is usually known as 'click2dial'. Here is how it works :
 . In OpenERP, the user clicks on the 'dial' button next to a phone number field in the partner view.
-. OpenERP connects to the FreeSWITCH Manager Interface and FreeSWITCH makes the user's phone ring.
+. OpenERP connects to the FreeSWITCH Event Socket Interface and FreeSWITCH makes the user's phone ring.
 . The user answers his own phone (if he doesn't, the process stops here).
 . FreeSWITCH dials the phone number found in OpenERP in place of the user.
 . If the remote party answers, the user can talk to his correspondent.
@@ -44,14 +45,14 @@ phone number is present in the partner/leads/employees/... of OpenERP. Here is h
 It also works on outgoing calls, so as to display the name of the callee on the SIP phone of the caller. For that, you should use the script "set_name_outgoing_timeout.sh".
 
 3) It adds a button "Open calling partner" in the menu "Sales > Address book" to get the partner corresponding to the calling party in one click. Here is how it works :
-. When the user clicks on the "Open calling partner" button, OpenERP sends a query to the FreeSWITCH Manager Interface to get a list of the current phone calls
+. When the user clicks on the "Open calling partner" button, OpenERP sends a query to the FreeSWITCH Event Socket Interface to get a list of the current phone calls
 . If it finds a phone call involving the user's phone, it gets the phone number of the calling party
 . It searches the phone number of the calling party in the Partners of OpenERP. If a record matches, it shows the name of the related Partner and proposes to open it, or open its related sale orders or invoices. If no record matches, it proposes to create a new Contact with the presented phone number as 'Phone' or 'Mobile' number or update an existing Contact.
 It is possible to get a pop-up of the partner corresponding to the calling party without any action from the user via the module *freeswitch_popup*.
 
 A detailed documentation for this module is available on the Akretion Web site : http://www.akretion.com/en/products-and-services/openerp-freeswitch-voip-connector """,
-    'author': 'Akretion',
-    'website': 'http://www.akretion.com/',
+    'author': 'Trever L. Adams',
+    'website': 'https://github.com/treveradams/openerp-freeswitch-connector',
     'depends': ['base_phone'],
     'external_dependencies': {'python': ['phonenumbers', 'ESL']},
     'data': [

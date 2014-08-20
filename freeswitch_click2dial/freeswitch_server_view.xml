@@ -40,10 +40,9 @@
                     <field name="active" />
                     <field name="ip_address" />
                     <field name="port" />
-                    <field name="login" />
                     <field name="password" password="True" />
                     <field name="context" />
-                    <field name="extension_priority" />
+<!--                    <field name="extension_priority" /> I don't believe this exists in FreeSwitch-->
                     <field name="out_prefix" />
                     <field name="national_prefix" />
                     <field name="international_prefix" />

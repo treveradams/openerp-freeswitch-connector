@@ -124,8 +124,8 @@ msgstr "Paramètres optionnels - pour les experts uniquement, peuvent être lais
 
 #. module: freeswitch_click2dial
 #: help:freeswitch.server,port:0
-msgid "TCP port on which the FreeSWITCH Manager Interface listens. Defined in /etc/freeswitch/manager.conf on FreeSWITCH."
-msgstr "Port TCP sur lequel écoute l'interface du Manager FreeSWITCH. Cf /etc/freeswitch/manager.conf sur le serveur FreeSWITCH."
+msgid "TCP port on which the FreeSWITCH Manager Interface listens. Defined in /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on FreeSWITCH."
+msgstr "Port TCP sur lequel écoute l'interface du Manager FreeSWITCH. Cf /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml sur le serveur FreeSWITCH."
 
 #. module: freeswitch_click2dial
 #: field:res.users,internal_number:0
@@ -167,8 +167,8 @@ msgstr "Le '%s' ne doit contenir que des caractères ASCII pour le serveur FreeS
 
 #. module: freeswitch_click2dial
 #: help:freeswitch.server,password:0
-msgid "Password that OpenERP will use to communicate with the FreeSWITCH Manager Interface. Refer to /etc/freeswitch/manager.conf on your FreeSWITCH server."
-msgstr "Mot de passe qui sera utilisé par OpenERP pour communiquer avec l'FreeSWITCH Manager Interface. Ce mot de passe est configuré dans le fichier /etc/freeswitch/manager.conf sur votre serveur FreeSWITCH."
+msgid "Password that OpenERP will use to communicate with the FreeSWITCH Manager Interface. Refer to /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on your FreeSWITCH server."
+msgstr "Mot de passe qui sera utilisé par OpenERP pour communiquer avec l'FreeSWITCH Manager Interface. Ce mot de passe est configuré dans le fichier /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml sur votre serveur FreeSWITCH."
 
 #. module: freeswitch_click2dial
 #: field:wizard.open.calling.partner,calling_number:0
@@ -453,11 +453,6 @@ msgid "Open Related Sale Orders"
 msgstr "Ouvrir les commandes associées"
 
 #. module: freeswitch_click2dial
-#: field:freeswitch.server,extension_priority:0
-msgid "Extension priority"
-msgstr "Priorité de l'extension"
-
-#. module: freeswitch_click2dial
 #: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:99
 #, python-format
 msgid "You should set a TCP port between 1 and 65535 for the FreeSWITCH server '%s'"
@@ -480,13 +475,8 @@ msgstr "freeswitch.common"
 
 #. module: freeswitch_click2dial
 #: help:freeswitch.server,context:0
-msgid "FreeSWITCH dialplan context from which the calls will be made. Refer to /etc/freeswitch/extensions.conf on your FreeSWITCH server."
-msgstr "Contexte du dialplan d'FreeSWITCH depuis lequel les appels seront initiés. Cf /etc/freeswitch/extensions.conf sur le serveur FreeSWITCH."
-
-#. module: freeswitch_click2dial
-#: help:freeswitch.server,extension_priority:0
-msgid "Priority of the extension in the FreeSWITCH dialplan. Refer to /etc/freeswitch/extensions.conf on your FreeSWITCH server."
-msgstr "Priorité de l'extension dans le dialplan d'FreeSWITCH. Cf /etc/freeswitch/extensions.conf sur le serveur FreeSWITCH."
+msgid "FreeSWITCH dialplan context from which the calls will be made. Refer to /usr/local/freeswitch/conf/dialplan/* on your FreeSWITCH server."
+msgstr "Contexte du dialplan d'FreeSWITCH depuis lequel les appels seront initiés. Cf /usr/local/freeswitch/conf/dialplan/* sur le serveur FreeSWITCH."
 
 #. module: freeswitch_click2dial
 #: field:freeswitch.server,active:0
@@ -553,11 +543,6 @@ msgid "List of FreeSWITCH servers."
 msgstr "Liste des serveurs FreeSWITCH."
 
 #. module: freeswitch_click2dial
-#: help:freeswitch.server,login:0
-msgid "Login that OpenERP will use to communicate with the FreeSWITCH Manager Interface. Refer to /etc/freeswitch/manager.conf on your FreeSWITCH server."
-msgstr "Nom d'utilisateur qu'OpenERP utilisera pour communiquer avec l'interface du Manager d'FreeSWITCH. Cf /etc/freeswitch/manager.conf sur le serveur FreeSWITCH."
-
-#. module: freeswitch_click2dial
 #: field:freeswitch.server,name:0
 msgid "FreeSWITCH server name"
 msgstr "Nom du serveur FreeSWITCH"
@@ -590,8 +575,8 @@ msgstr "Partenaire associé au numéro de téléphone appelant."
 
 #. module: freeswitch_click2dial
 #: field:freeswitch.server,password:0
-msgid "AMI password"
-msgstr "Mot de passe AMI"
+msgid "Event Socket password"
+msgstr "Mot de passe Event Socket"
 
 #. module: freeswitch_click2dial
 #: help:res.users,cdraccount:0
@@ -637,11 +622,6 @@ msgstr "DAHDI"
 #, python-format
 msgid "The object '%s' is not found in your OpenERP database, probably because the related module is not installed."
 msgstr "The object '%s' is not found in your OpenERP database, probably because the related module is not installed."
-
-#. module: freeswitch_click2dial
-#: field:freeswitch.server,login:0
-msgid "AMI login"
-msgstr "Nom d'utilisateur AMI"
 
 #. module: freeswitch_click2dial
 #: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:205
@@ -730,12 +710,6 @@ msgstr "Set a user-specific Alert-Info header in SIP request to user's IP Phone 
 #: view:res.users:0
 msgid "Standard parameters"
 msgstr "Paramètres standard"
-
-#. module: freeswitch_click2dial
-#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:97
-#, python-format
-msgid "The 'extension priority' must be a positive value for the FreeSWITCH server '%s'"
-msgstr "Le paramètre 'Priorité de l'extension' doit être un entier positif pour le serveur FreeSWITCH '%s'"
 
 #. module: freeswitch_click2dial
 #: view:freeswitch.server:0

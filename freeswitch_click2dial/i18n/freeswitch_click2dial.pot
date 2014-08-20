@@ -124,7 +124,7 @@ msgstr ""
 
 #. module: freeswitch_click2dial
 #: help:freeswitch.server,port:0
-msgid "TCP port on which the FreeSWITCH Manager Interface listens. Defined in /etc/freeswitch/manager.conf on FreeSWITCH."
+msgid "TCP port on which the FreeSWITCH Manager Interface listens. Defined in /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on FreeSWITCH."
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -167,7 +167,7 @@ msgstr ""
 
 #. module: freeswitch_click2dial
 #: help:freeswitch.server,password:0
-msgid "Password that OpenERP will use to communicate with the FreeSWITCH Manager Interface. Refer to /etc/freeswitch/manager.conf on your FreeSWITCH server."
+msgid "Password that OpenERP will use to communicate with the FreeSWITCH Manager Interface. Refer to /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on your FreeSWITCH server."
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -452,11 +452,6 @@ msgid "Open Related Sale Orders"
 msgstr ""
 
 #. module: freeswitch_click2dial
-#: field:freeswitch.server,extension_priority:0
-msgid "Extension priority"
-msgstr ""
-
-#. module: freeswitch_click2dial
 #: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:99
 #, python-format
 msgid "You should set a TCP port between 1 and 65535 for the FreeSWITCH server '%s'"
@@ -479,12 +474,7 @@ msgstr ""
 
 #. module: freeswitch_click2dial
 #: help:freeswitch.server,context:0
-msgid "FreeSWITCH dialplan context from which the calls will be made. Refer to /etc/freeswitch/extensions.conf on your FreeSWITCH server."
-msgstr ""
-
-#. module: freeswitch_click2dial
-#: help:freeswitch.server,extension_priority:0
-msgid "Priority of the extension in the FreeSWITCH dialplan. Refer to /etc/freeswitch/extensions.conf on your FreeSWITCH server."
+msgid "FreeSWITCH dialplan context from which the calls will be made. Refer to /usr/local/freeswitch/conf/dialplan/* on your FreeSWITCH server."
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -552,11 +542,6 @@ msgid "List of FreeSWITCH servers."
 msgstr ""
 
 #. module: freeswitch_click2dial
-#: help:freeswitch.server,login:0
-msgid "Login that OpenERP will use to communicate with the FreeSWITCH Manager Interface. Refer to /etc/freeswitch/manager.conf on your FreeSWITCH server."
-msgstr ""
-
-#. module: freeswitch_click2dial
 #: field:freeswitch.server,name:0
 msgid "FreeSWITCH server name"
 msgstr ""
@@ -589,7 +574,7 @@ msgstr ""
 
 #. module: freeswitch_click2dial
 #: field:freeswitch.server,password:0
-msgid "AMI password"
+msgid "Event Socket password"
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -634,11 +619,6 @@ msgstr ""
 #: code:addons/freeswitch_click2dial/wizard/open_calling_partner.py:78
 #, python-format
 msgid "The object '%s' is not found in your OpenERP database, probably because the related module is not installed."
-msgstr ""
-
-#. module: freeswitch_click2dial
-#: field:freeswitch.server,login:0
-msgid "AMI login"
 msgstr ""
 
 #. module: freeswitch_click2dial
@@ -727,12 +707,6 @@ msgstr ""
 #. module: freeswitch_click2dial
 #: view:res.users:0
 msgid "Standard parameters"
-msgstr ""
-
-#. module: freeswitch_click2dial
-#: code:addons/freeswitch_click2dial/freeswitch_click2dial.py:97
-#, python-format
-msgid "The 'extension priority' must be a positive value for the FreeSWITCH server '%s'"
 msgstr ""
 
 #. module: freeswitch_click2dial
