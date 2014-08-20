@@ -37,10 +37,9 @@ the documentation for web_socketio addon.
 </VirtualHost>
 
 
-web_socketio and web_notification are needed for popup on call
-==============================================================
+web_socketio are needed for popup on call
+=========================================
 https://bitbucket.org/anybox/web_socketio/ (for 7.x use hg checkout default)
-https://bitbucket.org/anybox/web_notification (for 7.x use hg checkout default)
 
 
 
@@ -53,5 +52,6 @@ Eventually, it just stops. Click to dial and caller id look-up continue to work.
 
 ALWAYS LOG OUT PROPERLY!
 
-Additionally, any time you restart OpenERP, you MUST restart the web_socketio
-server. Restarting the proxy (apache or nginx) is a good idea.
+Additionally, any time you restart OpenERP, you MUST then restart the web_socketio
+server. Restarting the proxy (apache or nginx), after restarting the others,
+is a good idea.

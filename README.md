@@ -11,7 +11,7 @@ Currently working:
  * Click to Dial for customers, events, employees and applicants.
  * "Open calling partner" under Sales.
  * "Open calling applicant" under Human Resources/Recruitment
- * Pop-up on in coming call, when configured. See README.md under
+ * Pop-up on incoming call, when configured. See README.md under
    patches-for-external for caveats. Also, editing may appear to work, but it
    does not!
  * Looking up Caller ID name by phone number works for Events, CRM,

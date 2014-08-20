@@ -2,6 +2,7 @@
 ##############################################################################
 #
 #    Base Phone Pop-up module for Odoo/OpenERP
+#    Copyright (C) 2014 Trever L. Adams
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify

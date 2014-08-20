@@ -23,7 +23,7 @@
     "name": "FreeSWITCH Click2dial HR",
     "version": "0.1",
     "author": "Trever L. Adams",
-    "website": "",
+    "website": "https://github.com/treveradams/openerp-freeswitch-connector",
     "license": "AGPL-3",
     "category": "Phone",
     "description": """

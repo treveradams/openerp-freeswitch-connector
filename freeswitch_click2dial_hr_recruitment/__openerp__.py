@@ -27,7 +27,9 @@
     "license": "AGPL-3",
     "category": "Phone",
     "description": """
-    This module adds a button "Dial" button on the Recruitment Application Form
+    This module adds a button "Dial" button on the Recruitment Application Form.
+    It also adds an "Open calling applicant" wizard, which can be found under
+    the menu "Human Resources > Recruitment."
 
     A detailed documentation for the OpenERP-FreeSWITCH connector is available on the site : http://github.com/treveradams/openerp-freeswitch-connector
     """,

@@ -2,6 +2,7 @@
 ##############################################################################
 #
 #    Base Phone Pop-up module for Odoo/OpenERP
+#    Copyright (C) 2014 Trever L. Adams
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -30,7 +31,7 @@
 Base Phone Pop-up
 =================
 
-When the user receives a phone call, OpenERP can automatically open the corresponding partner/lead/employee/... in a pop-up without any action from the user.
+When the user receives a phone call, OpenERP can automatically open the corresponding partner/lead/employee/applicant/... in a pop-up without any action from the user.
 
 The module *web_action_request* can be downloaded with Mercurial:
 
@@ -44,9 +45,11 @@ You will find some hints in this documentation : https://bitbucket.org/anybox/we
 
 Warning : proxying WebSockets is only supported since Nginx 1.3.13 ; the feature provided by this module won't work with older versions of Nginx.
 
+There are two XML-RPC calls that will be of interest: incall_notify_by_extension and incall_notify_by_login (this is user ID, not user name).
+
 TODO : document this new feature on the Akretion Web site : http://www.akretion.com/en/products-and-services/openerp-freeswitch-voip-connector """,
-    'author': 'Akretion',
-    'website': 'http://www.akretion.com/',
+    'author': 'Trever L. Adams',
+    'website': 'https://github.com/treveradams/openerp-freeswitch-connector',
     'depends': ['base_phone', 'web_action_request'],
     'data': [
         'res_users_view.xml',

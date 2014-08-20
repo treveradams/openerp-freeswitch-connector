@@ -2,6 +2,7 @@
 ##############################################################################
 #
 #    FreeSWITCH Click2dial module for OpenERP
+#    Copyright (C) 2014 Trever L. Adams
 #    Copyright (C) 2010-2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -28,8 +29,7 @@
     'summary': 'FreeSWITCH-OpenERP connector',
     'description': """This module adds 3 functionalities :
 
-1) It adds a 'dial' button in the partner form view, employee form view, event registration form view, and application form view so
-that users can directly dial a phone number through FreeSWITCH. This feature is usually known as 'click2dial'. Here is how it works :
+1) It adds a 'dial' button in the partner form view so that users can directly dial a phone number through FreeSWITCH. This feature is usually known as 'click2dial'. Here is how it works :
 . In OpenERP, the user clicks on the 'dial' button next to a phone number field in the partner view.
 . OpenERP connects to the FreeSWITCH Event Socket Interface and FreeSWITCH makes the user's phone ring.
 . The user answers his own phone (if he doesn't, the process stops here).
