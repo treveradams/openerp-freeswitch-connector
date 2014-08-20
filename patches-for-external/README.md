@@ -37,8 +37,8 @@ the documentation for web_socketio addon.
 </VirtualHost>
 
 
-web_socketio are needed for popup on call
-=========================================
+web_socketio is needed for popup on call
+========================================
 https://bitbucket.org/anybox/web_socketio/ (for 7.x use hg checkout default)
 
 
