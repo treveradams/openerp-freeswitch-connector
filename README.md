@@ -31,7 +31,7 @@ Caller ID and Pop-up on Call
 ============================
 
 Please, see freeswitch_click2dial/scripts/set_name_agi.py around lines 265-276
-for example python code for xml-rpc to get caller ID and do pop-up
+for example python code for XML-RPC to get caller ID and do pop-up
 notification. Note, causing the pop-up also fetches caller ID information.
 
 Getting geolocation data is implemented in an uncommitted script. I am not sure

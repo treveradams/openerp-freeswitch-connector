@@ -475,8 +475,8 @@ msgstr "freeswitch.common"
 
 #. module: freeswitch_click2dial
 #: help:freeswitch.server,context:0
-msgid "FreeSWITCH dialplan context from which the calls will be made. Refer to /usr/local/freeswitch/conf/dialplan/* on your FreeSWITCH server."
-msgstr "Contexte du dialplan d'FreeSWITCH depuis lequel les appels seront initiés. Cf /usr/local/freeswitch/conf/dialplan/* sur le serveur FreeSWITCH."
+msgid "FreeSWITCH dialplan context from which the calls will be made; e.g. 'XML default'. Refer to /usr/local/freeswitch/conf/dialplan/* on your FreeSWITCH server."
+msgstr "Contexte du dialplan d'FreeSWITCH depuis lequel les appels seront initiés; par exemple 'XML default'. Cf /usr/local/freeswitch/conf/dialplan/* sur le serveur FreeSWITCH."
 
 #. module: freeswitch_click2dial
 #: field:freeswitch.server,active:0
@@ -514,6 +514,11 @@ msgstr "Sociétés"
 #: selection:res.users,freeswitch_chan_type:0
 msgid "Skinny"
 msgstr "Skinny"
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "FreeTDM"
+msgstr ""
 
 #. module: freeswitch_click2dial
 #: model:ir.model,name:freeswitch_click2dial.model_freeswitch_dial

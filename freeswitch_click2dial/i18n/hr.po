@@ -155,7 +155,7 @@ msgstr ""
 #. module: freeswitch_click2dial
 #: help:freeswitch.server,context:0
 msgid ""
-"FreeSWITCH dialplan context from which the calls will be made. Refer to "
+"FreeSWITCH dialplan context from which the calls will be made; e.g. 'XML default'. Refer to "
 "/usr/local/freeswitch/conf/dialplan/* on your FreeSWITCH server."
 msgstr ""
 
@@ -192,6 +192,11 @@ msgstr ""
 #. module: freeswitch_click2dial
 #: selection:res.users,freeswitch_chan_type:0
 msgid "Skinny"
+msgstr ""
+
+#. module: freeswitch_click2dial
+#: selection:res.users,freeswitch_chan_type:0
+msgid "FreeTDM"
 msgstr ""
 
 #. module: freeswitch_click2dial

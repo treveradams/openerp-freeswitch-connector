@@ -32,6 +32,7 @@ import ESL
 import sys
 import csv
 import StringIO
+import re
 #import pprint
 #pp = pprint.PrettyPrinter(indent=4,stream=sys.stderr)
 
@@ -51,9 +52,8 @@ class freeswitch_server(orm.Model):
         'international_prefix': fields.char('International prefix', required=True, size=4, help="Prefix to add to make international phone calls (don't include the 'out prefix'). For e.g., in France, the International prefix is '00'."),
         'country_prefix': fields.char('My country prefix', required=True, size=4, help="Phone prefix of the country where the FreeSWITCH server is located. For e.g. the phone prefix for France is '33'. If the phone number to dial starts with the 'My country prefix', OpenERP will remove the country prefix from the phone number and add the 'out prefix' followed by the 'national prefix'. If the phone number to dial doesn't start with the 'My country prefix', OpenERP will add the 'out prefix' followed by the 'international prefix'."),
         'password': fields.char('Event Socket password', size=30, required=True, help="Password that OpenERP will use to communicate with the FreeSWITCH Manager Interface. Refer to /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on your FreeSWITCH server."),
-        'context': fields.char('Dialplan context', size=50, required=True, help="FreeSWITCH dialplan context from which the calls will be made. Refer to /usr/local/freeswitch/conf/dialplan/* on your FreeSWITCH server."),
+        'context': fields.char('Dialplan context', size=50, required=True, help="FreeSWITCH dialplan context from which the calls will be made; e.g. 'XML default'. Refer to /usr/local/freeswitch/conf/dialplan/* on your FreeSWITCH server."),
         'wait_time': fields.integer('Wait time (sec)', required=True, help="Amount of time (in seconds) FreeSWITCH will try to reach the user's phone before hanging up."),
-#        'extension_priority': fields.integer('Extension priority', required=True, help="Priority of the extension in the FreeSWITCH dialplan. Refer to /usr/local/freeswitch/conf/autoload_configs/event_socket.conf.xml on your FreeSWITCH server."),
         'alert_info': fields.char('Alert-Info SIP header', size=255, help="Set Alert-Info header in SIP request to user's IP Phone for the click2dial feature. If empty, the Alert-Info header will not be added. You can use it to have a special ring tone for click2dial (a silent one !) or to activate auto-answer for example."),
         'company_id': fields.many2one('res.company', 'Company', help="Company who uses the FreeSWITCH server."),
     }
@@ -69,11 +69,11 @@ class freeswitch_server(orm.Model):
     _defaults = {
         'active': True,
         'port': 8021,  # Default Event Socket port
-        'national_prefix': '',
+        'national_prefix': '1',
         'international_prefix': '011',
         'country_prefix': _get_prefix_from_country,
-#        'extension_priority': 1,
-        'wait_time': 15,
+        'context': 'XML default',
+        'wait_time': 60,
         'company_id': lambda self, cr, uid, context: self.pool.get('res.company')._company_default_get(cr, uid, 'freeswitch.server', context=context),
     }
 
@@ -92,11 +92,9 @@ class freeswitch_server(orm.Model):
                     raise orm.except_orm(_('Error :'), _("Only use digits for the '%s' on the FreeSWITCH server '%s'" % (digit_prefix[0], server.name)))
             if server.wait_time < 1 or server.wait_time > 120:
                 raise orm.except_orm(_('Error :'), _("You should set a 'Wait time' value between 1 and 120 seconds for the FreeSWITCH server '%s'" % server.name))
-#            if server.extension_priority < 1:
-#                raise orm.except_orm(_('Error :'), _("The 'extension priority' must be a positive value for the FreeSWITCH server '%s'" % server.name))
             if server.port > 65535 or server.port < 1:
                 raise orm.except_orm(_('Error :'), _("You should set a TCP port between 1 and 65535 for the FreeSWITCH server '%s'" % server.name))
-            for check_string in [dialplan_context, alert_info, login, password]:
+            for check_string in [dialplan_context, alert_info, password]:
                 if check_string[1]:
                     try:
                         string = check_string[1].encode('ascii')
@@ -262,28 +260,34 @@ class freeswitch_server(orm.Model):
         if user.freeswitch_chan_type == 'SIP':
             # We can only have one alert-info header in a SIP request
             if user.alert_info:
-                variable += 'alert_info=' + user.alert_info
+                variable += 'alert_info=' + user.alert_info + ','
             elif fs_server.alert_info:
-                variable += 'alert_info=' + fs_server.alert_info
-            if user.variable:
-                for user_variable in user.variable.split('|'):
-                    if len(variable) and len(user_variable):
-                        variable += ';'
-                    variable += user_variable.strip()
+                variable += 'alert_info=' + fs_server.alert_info + ','
+        if user.variable:
+            for user_variable in user.variable.split('|'):
+                if len(variable) and len(user_variable):
+                    variable += ','
+                variable += user_variable.strip()
+        if user.callerid:
+            caller_name = re.search(r'([^<]*).*', user.callerid).group(1).strip()
+            caller_number = re.search(r'.*<(.*)>.*', user.callerid).group(1).strip()
+            if caller_name:
+                caller_name = caller_name.replace(",", "\,")
+                variable += 'effective_caller_id_name=' + caller_name + ','
+            if caller_number:
+                variable += 'effective_caller_id_number=' + caller_number + ','
+            if fs_server.wait_time != 60:
+                variable += 'ignore_early_media=true' + ','
+                variable += 'originate_timeout=' + str(fs_server.wait_time) + ','
 
         try:
-            # originate FreeTDM/1/3 5908204 XML Internal-FXS
-            # originate user/2005 1003 XML Internal-FXS
-            # api originate <effective_caller_id_number=1234,originate_timeout=7,call_timeout=7>user/2005 1005 XML Internal-FXS 'Testing Barf Truck' 90125
+            # api originate <effective_caller_id_number=1234,originate_timeout=7,call_timeout=7>user/2005 1005 XML Internal-FXS 'Caller ID showed to OpenERP user' 90125
 #            fs_manager.Originate(
 #                user.freeswitch_chan_type + '/' + user.resource + ( ('/' + user.dial_suffix) if user.dial_suffix else ''),
-#                extension = fs_number,
-#                timeout = str(fs_server.wait_time*1000),
-#                caller_id = user.callerid,
+#                ...
 #                account = user.cdraccount,
 #                variable = variable)
-             dial_string = (('<' + variable + '>') if variable else '') + user.freeswitch_chan_type + '/' + user.resource + ( ('/' + user.dial_suffix) if user.dial_suffix else '') + ' ' + fs_number + ' XML Internal-FXS' + ' ' + fs_number + ' ' + fs_number
-#             raise orm.except_orm(_('Error :'), dial_string)
+             dial_string = (('<' + variable + '>') if variable else '') + user.freeswitch_chan_type + '/' + user.resource + ( ('/' + user.dial_suffix) if user.dial_suffix else '') + ' ' + fs_number + ' ' + fs_server.context + ' ' + fs_number + ' ' + fs_number
              fs_manager.api('originate', dial_string.encode("ascii"))
         except Exception, e:
             _logger.error("Error in the Originate request to FreeSWITCH server %s" % fs_server.ip_address)

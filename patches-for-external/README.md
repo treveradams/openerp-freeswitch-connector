@@ -37,9 +37,10 @@ the documentation for web_socketio addon.
 </VirtualHost>
 
 
-web_socketio is needed for popup on call
-========================================
+web_socketio and web_action_request are needed for pop-up on call
+=================================================================
 https://bitbucket.org/anybox/web_socketio/ (for 7.x use hg checkout default)
+https://bitbucket.org/anybox/web_action_request/ (for 7.x us hg checkout 7.0)
 
 
 

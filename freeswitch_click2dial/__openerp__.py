@@ -23,7 +23,7 @@
 
 {
     'name': 'FreeSWITCH Click2dial',
-    'version': '0.5',
+    'version': '0.6',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'FreeSWITCH-OpenERP connector',
