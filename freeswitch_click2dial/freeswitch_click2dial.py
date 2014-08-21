@@ -260,9 +260,9 @@ class freeswitch_server(orm.Model):
         if user.freeswitch_chan_type == 'SIP':
             # We can only have one alert-info header in a SIP request
             if user.alert_info:
-                variable += 'alert_info=' + user.alert_info + ','
+                variable += 'alert_info=' + user.alert_info
             elif fs_server.alert_info:
-                variable += 'alert_info=' + fs_server.alert_info + ','
+                variable += 'alert_info=' + fs_server.alert_info
         if user.variable:
             for user_variable in user.variable.split('|'):
                 if len(variable) and len(user_variable):
@@ -272,13 +272,19 @@ class freeswitch_server(orm.Model):
             caller_name = re.search(r'([^<]*).*', user.callerid).group(1).strip()
             caller_number = re.search(r'.*<(.*)>.*', user.callerid).group(1).strip()
             if caller_name:
+                if len(variable):
+                    variable += ','
                 caller_name = caller_name.replace(",", "\,")
-                variable += 'effective_caller_id_name=' + caller_name + ','
+                variable += 'effective_caller_id_name=' + caller_name
             if caller_number:
-                variable += 'effective_caller_id_number=' + caller_number + ','
+                if len(variable):
+                    variable += ','
+                variable += 'effective_caller_id_number=' + caller_number
             if fs_server.wait_time != 60:
+                if len(variable):
+                    variable += ','
                 variable += 'ignore_early_media=true' + ','
-                variable += 'originate_timeout=' + str(fs_server.wait_time) + ','
+                variable += 'originate_timeout=' + str(fs_server.wait_time)
 
         try:
             # api originate <effective_caller_id_number=1234,originate_timeout=7,call_timeout=7>user/2005 1005 XML Internal-FXS 'Caller ID showed to OpenERP user' 90125
