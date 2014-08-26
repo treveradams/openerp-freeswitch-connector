@@ -55,7 +55,7 @@ class hr_applicant(orm.Model):
                 cr, uid, ids, context=context)
 
     def case_close_with_emp(self, cr, uid, ids, context=None):
-        """ We need to  change phone numbers to 8 zeros
+        """ We need to erase applicant record phone numbers
             to avoid problems with callerid lookup.
         """
         if context is None:
