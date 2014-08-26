@@ -15,8 +15,7 @@ Currently working:
    patches-for-external for caveats. Also, editing may appear to work, but it
    does not!
  * Looking up Caller ID name by phone number works for Events, CRM,
-   and Employees. It does NOT work for applicants. It returns the subject
-   instead! (This is a bug, I hope to fix it soon.)
+   Employees, and Applicants.
 
 It also only works (or at least is only tested) with OpenERP 7.
 

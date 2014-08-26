@@ -22,7 +22,7 @@
 
 {
     'name': 'HR Recruitment Phone',
-    'version': '0.1',
+    'version': '0.2',
     'category': 'Phone',
     'license': 'AGPL-3',
     'summary': 'Validate phone numbers in HR Recruitment',
@@ -31,6 +31,8 @@ HR Recruitment Phone
 ====================
 
 This module validate phone numbers in the HR Recruitment module, just like the *base_phone* module valide phone numbers in the Partner form. Please refer to the description of the *base_phone* module for more information.
+
+This module also extracts the applicants name for callerid lookups. It also overrides 'case_close_with_emp' to erase phone numbers to avoid problems with callerid lookup for hired employees.
 
 This module is independant from the FreeSWITCH connector.
 

@@ -39,6 +39,36 @@ class hr_applicant(orm.Model):
         return super(hr_applicant, self).write(
             cr, uid, ids, vals_reformated, context=context)
 
+    def name_get(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+        if context.get('callerid'):
+            res = []
+            if isinstance(ids, (int, long)):
+                ids = [ids]
+            for applicant in self.browse(cr, uid, ids, context=context):
+                name = applicant.partner_name
+                res.append((applicant.id, name))
+            return res
+        else:
+            return super(hr_applicant, self).name_get(
+                cr, uid, ids, context=context)
+
+    def case_close_with_emp(self, cr, uid, ids, context=None):
+        """ We need to  change phone numbers to 8 zeros
+            to avoid problems with callerid lookup.
+        """
+        if context is None:
+            context = {}
+
+        res = super(hr_applicant, self).case_close_with_emp(
+            cr, uid, ids, context=context)
+        for applicant in self.browse(cr, uid, ids, context=context):
+#            phone = self.read(cr, uid, ids, ['partner_phone'])[0]["partner_phone"]
+#            mobile = self.read(cr, uid, ids, ['partner_mobile'])[0]["partner_mobile"]
+            self.write(cr, uid, [applicant.id], {'partner_phone': ""}, context=context)
+            self.write(cr, uid, [applicant.id], {'partner_mobile': ""}, context=context)
+        return res
 
 class phone_common(orm.AbstractModel):
     _inherit = 'phone.common'
