@@ -8,10 +8,12 @@ This is no longer simply a fork. It has many added features over that of the
 original.
 
 Currently working:
- * Click to Dial for customers, events, employees and applicants.
- * "Open calling partner" under Sales.
- * "Open calling applicant" under Human Resources/Recruitment
- * Pop-up on incoming call, when configured. See README.md under
+ * Click to Dial for customers, events, employees and applicants. ("Dial" next
+   to phone numbers.)
+ * "Open Caller" (An "A" next to preferences) will open Partners, Events,
+   Employees, Applicants for jobs, etc. (This works differently than before by
+   opening the record directly.)
+ * Pop-up on in coming call, when configured. See README.md under
    patches-for-external for caveats. Also, editing may appear to work, but it
    does not!
  * Looking up Caller ID name by phone number works for Events, CRM,
@@ -38,3 +40,37 @@ about the design. 99% of the code should be usable no matter what I decide.
 The question is whether my script should be a wsgi script which runs on the
 FreeSWITCH server or the OpenERP server, or an event socket script that runs on
 the FreeSWITCH server.
+
+
+Using The Features
+==================
+
+* You should install base_phone no matter what. This handles formatting.
+* base_phone_popup allows you to have FreeSWITCH pop-up information about the
+  caller in active OpenERP sessions.
+* All modules ending in _phone do phone number formatting/validation for lookup
+  and storing for the module by the same name. If you use the module in
+  question, install the _phone module. The hr_recruitment_phone module also
+  does some fix-ups to make sure the right fields are returned for caller ID
+  lookups.
+* crm_claim_phone allows the user to claim a phone call with the partner.
+
+Any place where modules exist to do click to dial, there will appear "Dial" (possibly translated) next to the phone number, click the dial and your phone will be called (if things are configured correctly), then FreeSWITCH will call the remote party after you answer your phone.
+
+When a call is inbound (you do not have to have answered it, only caller ID information needs to be received), then click the A ("Open Caller") next to Preferences. This will open the appropriate record. If there is no call, nothing will happen.
+
+
+Configuring
+===========
+
+Your account to administer the settings for this module will need access to "Technical Features". This user may also need "Portal" access so that the menu options will show up.
+
+Next, go to Settings > Technical > Telephony > FreeSWITCH Servers. Edit or create a new entry. You will want it to be active. Next, set the IP address or fully qualified DNS name for the FreeSWITCH server. The IP address, or IP addresses that the DNS name resolve to, must be setup with FreeSWITCH as listening for event socket connections. Next, set the port. This is the port that FreeSWITCH is configured to listen on. Finally, set the password to that which FreeSWITCH is setup to use for inbound event socket connections. Dial Plan context is the context you want any call placed by OpenERP to start in. Out Prefix is any prefix needed to get an outside line, if any; e.g. many PBXes in the USA use 9 to get an outside line. Alert-Info SIP Header is the header sent to SIP phones to set a ring tone. This can be used to make the ringing made by the phone when it is called by FreeSWITCH before dialing the called person quiet or silent. Wait Time in seconds is how long the call should continue without being answered (auto terminate after this many seconds).
+
+For caller ID name lookup and pop-up notifications, you will need to create a user, e.g. FreeSWITCH, in OpenERP. This user only needs rights to "Phone CallerID." You will need to know this users id (number, not name) to do XML-RPC to do look up and pop-up functionality along with the user's password.
+
+For each user you use to use this for, you will need to setup options in the Telephony tab for the user. You can choose if pop-up notifications are active and if CRM claim call functionality is enabled. Channel Type is likely FreeTDM or SIP, although it may be something else (untested by me). Resource name is the resource to go with that channel type. For example, if it is FreeTDM and the user is port 5 in span 1, then the resource is 1/5. If the user has the internal number of 2005 in the SIP directory, then the resource is likely 2005. Internal number is the number of the user when dialed from inside the PBX/SoftSWITCH. Caller ID is what should be set as the caller ID name and number when making a call with the click to dial functionality. This must be in the format of Name <number>; e.g. Administrator <01234567>.
+
+CDR Account is not attached at the moment. User-specific Dial Suffix is attached, but does it do anything or work? User-specific Alert-Info SIP Header overrides the server setting for the ring tone. User-specific Variable is any SIP header(s) you want to add. If there are multiple variables, separate them with pipe (|).
+
+You will need to use the Settings > Technical > Telephony > Reformat Phone Numbers wizard if you have phone numbers that are not in the appropriate international format (this will be done for you in the future if you have the right _phone modules installed). WARNING: Be aware that if you do not have the country for your company/companies set properly, this will not do what you want. You will be sorry. You have been warned!

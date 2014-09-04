@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   FreeSWITCH Click2dial module for OpenERP
-  Copyright (C) 2014 Trever L. Adams
   Copyright (C) 2010-2014 Alexis de Lattre <alexis@via.ecp.fr>
   The licence is in the file __openerp__.py
 -->
@@ -36,17 +35,20 @@
                 </div>
                 <group name="main">
                     <field name="company_id"
-                        invisible="not context.get('freeswitch_server_main_view')"
                         groups="base.group_multi_company"/>
                     <field name="active" />
+                </group>
+                <group name="es" string="FreeSWITCH Event Socket">
                     <field name="ip_address" />
                     <field name="port" />
                     <field name="password" password="True" />
+                    <button name="test_es_connection" type="object"
+                        string="Test Connection to FreeSWITCH"
+                        icon="gtk-network" colspan="2"/>
+                </group>
+                <group name="dialplan" string="Dialplan Parameters">
                     <field name="context" />
                     <field name="out_prefix" />
-                    <field name="national_prefix" />
-                    <field name="international_prefix" />
-                    <field name="country_prefix" />
                     <field name="alert_info" />
                     <field name="wait_time" />
                 </group>
@@ -64,9 +66,7 @@
             <field name="name" />
             <field name="ip_address" />
             <field name="company_id"
-                invisible="not context.get('freeswitch_server_main_view')"
                 groups="base.group_multi_company" />
-            <field name="country_prefix" />
         </tree>
     </field>
 </record>
@@ -76,7 +76,6 @@
     <field name="name">FreeSWITCH Servers</field>
     <field name="res_model">freeswitch.server</field>
     <field name="view_mode">tree,form</field>
-    <field name="context">{'freeswitch_server_main_view': True}</field>
 </record>
 
 <!-- Menu entry under Settings > Technical > Phone -->

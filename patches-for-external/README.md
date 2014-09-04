@@ -39,8 +39,8 @@ the documentation for web_socketio addon.
 
 web_socketio and web_action_request are needed for pop-up on call
 =================================================================
-https://bitbucket.org/anybox/web_socketio/ (for 7.x use hg checkout default)
-https://bitbucket.org/anybox/web_action_request/ (for 7.x us hg checkout 7.0)
+https://bitbucket.org/anybox/web_socketio/ (for 7.x use hg checkout default, not needed for 8.x/Odoo)
+https://bitbucket.org/anybox/web_action_request/ (for 7.x use hg checkout 7.0, for 8.x/Odoo, use hg checkout 8.0)
 
 
 
@@ -53,6 +53,5 @@ Eventually, it just stops. Click to dial and caller id look-up continue to work.
 
 ALWAYS LOG OUT PROPERLY!
 
-Additionally, any time you restart OpenERP, you MUST then restart the web_socketio
-server. Restarting the proxy (apache or nginx), after restarting the others,
-is a good idea.
+Additionally, any time you restart OpenERP, you MUST restart the web_socketio
+server. Restarting the proxy (apache or nginx) is a good idea.

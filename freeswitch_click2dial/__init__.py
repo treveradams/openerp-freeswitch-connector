@@ -20,4 +20,4 @@
 ##############################################################################
 
 from . import freeswitch_click2dial
-from . import wizard
+from . import controller

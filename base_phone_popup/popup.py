@@ -2,7 +2,6 @@
 ##############################################################################
 #
 #    Base Phone Pop-up module for Odoo/OpenERP
-#    Copyright (C) 2014 Trever L. Adams
 #    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,6 +20,7 @@
 ##############################################################################
 
 from openerp.osv import orm, fields
+from openerp.tools.translate import _
 import logging
 
 
@@ -44,6 +44,16 @@ class phone_common(orm.AbstractModel):
                 'target': 'new',
                 'res_id': record_res[1],
                 }
+        else:
+            action = {
+                'name': _('Number Not Found'),
+                'type': 'ir.actions.act_window',
+                'res_model': 'number.not.found',
+                'view_mode': 'form',
+                'views': [[False, 'form']],  # Beurk, but needed
+                'target': 'new',
+                'context': {'default_calling_number': number}
+            }
         return action
 
     def incall_notify_by_login(

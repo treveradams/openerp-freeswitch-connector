@@ -12,7 +12,6 @@
         <record id="demo_fs_server" model="freeswitch.server">
             <field name="name">Akretion FreeSWITCH IPBX</field>
             <field name="ip_address">freeswitch.akretion.com</field>
-            <field name="country_prefix">33</field>
             <field name="login">click2dial</field>
             <field name="password">mypassword</field>
             <field name="context">from-internal</field>

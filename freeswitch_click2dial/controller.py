@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Base Phone module for OpenERP
-#    Copyright (C) 2014 Alexis de Lattre <alexis@via.ecp.fr>
+#    FreeSWITCH click2dial module for OpenERP
+#    Copyright (C) 2014 Alexis de Lattre (alexis@via.ecp.fr)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,7 +19,13 @@
 #
 ##############################################################################
 
-from . import base_phone
-from . import wizard
-from . import report_sxw_format
-from . import controller
+import openerp
+
+
+class FreeSWITCHClick2dialController(openerp.addons.web.http.Controller):
+    _cp_path = '/freeswitch_click2dial'
+
+    @openerp.addons.web.http.jsonrequest
+    def get_record_from_my_channel(self, req):
+        res = req.session.model('freeswitch.server').get_record_from_my_channel()
+        return res
