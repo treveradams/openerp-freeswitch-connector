@@ -15,26 +15,26 @@ the same user as OpenERP.
 Apache requires that the least specific URL be first. This is the opposite of
 the documentation for web_socketio addon.
 
-<VirtualHost *:80>
+&lt;VirtualHost *:80&gt;
     ServerAdmin jssuzanne@anybox.fr
     ServerName www.myopenerp.fr
-    <location />
+    &lt;location /&gt;
             ProxyPreserveHost On
             ProxyPass http://localhost:8069/
             ProxyPassReverse http://localhost:8069/
-    </location>
-    <location /socket.io>
+    &lt;/location&gt;
+    &lt;location /socket.io&gt;
             ProxyPreserveHost On
             ProxyPass http://localhost:8068/socket.io
             ProxyPassReverse http://localhost:8068/socket.io
-    </location>
-    <location /socket.io/1/websocket>
+    &lt;/location&gt;
+    &lt;location /socket.io/1/websocket&gt;
             ProxyPreserveHost On
             ProxyPass ws://localhost:8068/socket.io/1/websocket
             ProxyPassReverse ws://localhost:8068/socket.io/1/websocket
-    </location>
+    &lt;/location&gt;
 
-</VirtualHost>
+&lt;/VirtualHost&gt;
 
 
 web_socketio and web_action_request are needed for pop-up on call
