@@ -55,3 +55,5 @@ ALWAYS LOG OUT PROPERLY!
 
 Additionally, any time you restart OpenERP, you MUST restart the web_socketio
 server. Restarting the proxy (apache or nginx) is a good idea.
+
+web_socketio MUST be started AFTER OpenERP is completely up.
