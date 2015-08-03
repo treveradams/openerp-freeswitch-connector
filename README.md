@@ -75,3 +75,10 @@ Using The Features
 Any place where modules exist to do click to dial, there will appear "Dial" (possibly translated) next to the phone number, click the dial and your phone will be called (if things are configured correctly), then FreeSWITCH will call the remote party after you answer your phone.
 
 When a call is inbound (you do not have to have answered it, only caller ID information needs to be received), then click the A ("Open Caller") next to Preferences. This will open the appropriate record. If there is no call, nothing will happen.
+
+
+Dependencies
+============
+See README.md under patches-for-external
+
+Also, you will need the FreeSWITCH ESL python module. You will find it under ${FREESWITCH_SRC_TOP_DIR}/libs/esl/python. Go to ${FREESWITCH_SRC_TOP_DIR}/libs/esl. Type make. Then make pymod. You will then need to install ${FREESWITCH_SRC_TOP_DIR}/libs/esl/python/ESL.py and ${FREESWITCH_SRC_TOP_DIR}/libs/esl/python/_ESL.so into the appropriate places on your OpenERP/Odoo server. (https://wiki.freeswitch.org/wiki/Event_Socket_Library#Installation for more information.) An alternative method would involve https://github.com/gurteshwar/freeswitch-esl-python.
