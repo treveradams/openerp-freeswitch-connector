@@ -48,15 +48,8 @@ You will need to use the Settings > Technical > Telephony > Reformat Phone Numbe
 Caller ID and Pop-up on Call
 ============================
 
-Please, see freeswitch_click2dial/scripts/set_name_agi.py around lines 265-276
-for example python code for XML-RPC to get caller ID and do pop-up
-notification. Note, causing the pop-up also fetches caller ID information.
-
-Getting geolocation data is implemented in an uncommitted script. I am not sure
-about the design. 99% of the code should be usable no matter what I decide.
-The question is whether my script should be a wsgi script which runs on the
-FreeSWITCH server or the OpenERP server, or an event socket script that runs on
-the FreeSWITCH server.
+Please, see freeswitch_click2dial/scripts/get_caller_name.py. The script is documented.
+I do not recommend that you use the geolocation code as it will make things too slow.
 
 
 Using The Features
