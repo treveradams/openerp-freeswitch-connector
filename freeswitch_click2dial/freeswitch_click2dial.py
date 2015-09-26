@@ -465,7 +465,7 @@ class phone_common(orm.AbstractModel):
 #                ...
 #                account = user.cdraccount,
 #                variable = variable)
-            dial_string = (('<' + variable + '>') if variable else '') + channel + ' ' + fs_number + ' ' + fs_server.context + '\'FreeSWITCH/Odoo Connector\' ' + fs_number
+            dial_string = (('<' + variable + '>') if variable else '') + channel + ' ' + fs_number + ' ' + fs_server.context + ' ' + '\'FreeSWITCH/Odoo Connector\' ' + fs_number
 #             raise orm.except_orm(_('Error :'), dial_string)
             fs_manager.api('originate', dial_string.encode("ascii"))
         except Exception, e:
