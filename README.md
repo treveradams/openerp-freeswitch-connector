@@ -1,3 +1,12 @@
+Working Toward Deprecation
+==========================
+I am working toward deprecating this repository. Please, see
+https://github.com/treveradams/connector-telephony/ for the current work.
+That repository has a working (at least for me) version for OpenERP 7.0.
+It also contains a repository that may work for 8.0. I haven't tested it.
+
+I will remove this tree as soon as the pull requests are accepted.
+
 openerp-freeswitch-connector
 ============================
 
